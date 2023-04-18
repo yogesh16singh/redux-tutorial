@@ -1,25 +1,29 @@
-import logo from './logo.svg';
-import './App.css';
+import { connect } from "react-redux";
 
-function App() {
+import { changeToROHAN, changeToRitik } from "./redux/actionCreator/actionCreators";
+
+const mapStateToProps = (store) => {
+  let newstate = { ...store };
+  return newstate;
+}
+const mapDispatchToProps = (dispatch) => {
+  return {
+    chritik: () => { dispatch(changeToRitik()) },
+    chrohan: () => { dispatch(changeToROHAN()) },
+  }
+}
+
+function App(props) {
+  let newp = props;
+
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+      <h1>REDUX TUTORIAL BY {newp.name}</h1>
+      <button onClick={(e) => newp.chrohan(e)}>changeToROHAN</button>
+      <button onClick={(e) => newp.chritik(e)}>changeToRitik</button>
+    </>
   );
 }
 
-export default App;
+export default connect(mapStateToProps, mapDispatchToProps)(App);
